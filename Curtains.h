@@ -3,25 +3,26 @@
 
 #include "Arduino.h"
 #include <Stepper_Motor.h>
+#define DEFAULT_LENGTH 200 * 44
 
 class Curtains: public Stepper_Motor {
   public:
     Curtains(
-        int enable_pin,
-        int dir_pin,
-        int step_pin,
-        int length
+        byte enable_pin,
+        byte dir_pin,
+        byte step_pin,
+        int length = DEFAULT_LENGTH
     );
     Curtains(
-        int enable_pin,
-        int dir_pin,
-        int step_pin,
-        int sleep_pin,
-        int reset_pin,
-        int ms1_pin,
-        int ms2_pin,
-        int ms3_pin,
-        int length
+        byte enable_pin,
+        byte dir_pin,
+        byte step_pin,
+        byte sleep_pin,
+        byte reset_pin,
+        byte ms1_pin,
+        byte ms2_pin,
+        byte ms3_pin,
+        int length = DEFAULT_LENGTH
     );
     void open();
     void open(int percentage);

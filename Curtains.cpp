@@ -2,9 +2,9 @@
 #include <Stepper_Motor.h>
 
 Curtains::Curtains(
-    int enable_pin,
-    int direction_pin,
-    int step_pin,
+    byte enable_pin,
+    byte direction_pin,
+    byte step_pin,
     int length
 ) : Stepper_Motor(
     enable_pin,
@@ -15,14 +15,14 @@ Curtains::Curtains(
 }
 
 Curtains::Curtains(
-    int enable_pin,
-    int direction_pin,
-    int step_pin,
-    int sleep_pin,
-    int reset_pin,
-    int ms1_pin,
-    int ms2_pin,
-    int ms3_pin,
+    byte enable_pin,
+    byte direction_pin,
+    byte step_pin,
+    byte sleep_pin,
+    byte reset_pin,
+    byte ms1_pin,
+    byte ms2_pin,
+    byte ms3_pin,
     int length
 ) : Stepper_Motor(
     enable_pin,
@@ -38,6 +38,7 @@ Curtains::Curtains(
 }
 
 void Curtains::open() {
+    // set direction, enabling, and disabling once
     antiClockwise();
     enable();
     takeSteps();
@@ -52,6 +53,7 @@ void Curtains::open(int percentage) {
 }
 
 void Curtains::close() {
+    // set direction, enabling, and disabling once
     clockwise();
     enable();
     takeSteps();
