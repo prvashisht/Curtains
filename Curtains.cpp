@@ -37,6 +37,45 @@ Curtains::Curtains(
     _length = length;
 }
 
+void Curtains::setButtonAndLimitSwitch(
+    byte buttons_pin,
+    int button_clockwise_threshold,
+    int button_anti_clockwise_threshold
+) {
+    _pin_buttons = buttons_pin;
+    _button_clockwise_threshold = button_clockwise_threshold;
+    _button_anti_clockwise_threshold = button_anti_clockwise_threshold;
+
+    pinMode(_pin_buttons, INPUT);
+}
+void Curtains::setButtonAndLimitSwitch(
+    byte buttons_pin,
+    int button_clockwise_threshold,
+    int button_anti_clockwise_threshold,
+    byte limit_switch_pin
+) {
+    _pin_buttons = buttons_pin;
+    _button_clockwise_threshold = button_clockwise_threshold;
+    _button_anti_clockwise_threshold = button_anti_clockwise_threshold;
+    _pin_limit_switch = limit_switch_pin;
+
+    pinMode(_pin_buttons, INPUT);
+    pinMode(_pin_limit_switch, INPUT);
+}
+
+void Curtains::_readButtonInputs() {
+    int buttonValue = analogRead(_pin_buttons);
+    if (buttonValue > _button_clockwise_threshold) {
+        _pressedButton = BUTTON_CLOCKWISE;
+    } else if (buttonValue > _button_anti_clockwise_threshold) {
+        _pressedButton = BUTTON_ANTI_CLOCKWISE;
+    } else {
+        _pressedButton = NONE;
+    }
+
+    _isLimitSwitchPressed = digitalRead(_pin_limit_switch);
+}
+
 void Curtains::open() {
     // set direction, enabling, and disabling once
     antiClockwise();
